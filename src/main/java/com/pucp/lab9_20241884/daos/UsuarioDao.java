@@ -44,6 +44,42 @@ public class UsuarioDao extends BaseDao {
     }
 
 
+    public Usuario validarUsuario(String email, String password)
+            throws SQLException {
+
+        String sql = "SELECT * FROM usuario " +
+                "WHERE email = ? AND password_hash = SHA2(?, 256) " +
+                "AND estado = 'ACTIVO'";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, email);
+            pstmt.setString(2, password);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+
+                if (rs.next()) {
+
+                    Usuario usuario = new Usuario();
+
+                    usuario.setIdUsuario(rs.getInt("id_usuario"));
+                    usuario.setNombres(rs.getString("nombres"));
+                    usuario.setApellidos(rs.getString("apellidos"));
+                    usuario.setEmail(rs.getString("email"));
+                    usuario.setRol(rs.getString("rol"));
+                    usuario.setEstado(rs.getString("estado"));
+
+                    return usuario;
+                }
+            }
+        }
+
+        return null;
+    }
+
+
+
 
 
 
