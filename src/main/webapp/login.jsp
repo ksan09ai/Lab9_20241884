@@ -6,11 +6,50 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+    String mensaje = (String) session.getAttribute("mensaje");
+    String error = (String) request.getAttribute("error");
+
+    session.removeAttribute("mensaje");
+%>
+
 <html>
 <head>
-    <title>Title</title>
+    <title>Iniciar Sesion</title>
 </head>
 <body>
+
+<% if (mensaje != null) { %>
+<p><%= mensaje %></p>
+<% } %>
+
+<% if (error != null) { %>
+<p><%= error %></p>
+<% } %>
+
+<form action="<%= request.getContextPath()%>/LoginServlet" method="post">
+
+    <label>Correo: </label>
+    <input type="email" name="email" required>
+    <br><br>
+
+    <label>Contraseña: </label>
+    <input type="password" name="password" required>
+    <br><br>
+
+    <button type="submit">Iniciar sesion</button>
+
+</form>
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>

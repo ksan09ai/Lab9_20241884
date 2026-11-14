@@ -29,7 +29,7 @@ public class UsuarioDao extends BaseDao {
 
         String sql = "INSERT INTO usuario " +
                 "(nombres, apellidos, email, password_hash, rol, estado) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+                "VALUES (?, ?, ?, SHA2(?,256), 'LECTOR', 'ACTIVO')";
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -38,8 +38,6 @@ public class UsuarioDao extends BaseDao {
             pstmt.setString(2, usuario.getApellidos());
             pstmt.setString(3, usuario.getEmail());
             pstmt.setString(4, usuario.getPasswordHash());
-            //pstmt.setString(5, "LECTOR");
-            //pstmt.setString(6, "ACTIVO");
 
             pstmt.executeUpdate();
         }

@@ -1,13 +1,16 @@
 package com.pucp.lab9_20241884.servlets;
 
+import com.pucp.lab9_20241884.beans.Usuario;
 import com.pucp.lab9_20241884.daos.UsuarioDao;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 
 @WebServlet("/RegistroServlet")
@@ -53,12 +56,29 @@ public class RegistroServlet extends HttpServlet {
                 return;
             }
 
+
+            Usuario usuario = new Usuario();
+
+            usuario.setNombres(nombres);
+            usuario.setApellidos(apellidos);
+            usuario.setEmail(email);
+            usuario.setPasswordHash(password);
+            usuario.setRol("LECTOR");
+            usuario.setEstado("ACTIVO");
+
+            usuarioDao.registrarUsuario(usuario);
+            HttpSession session = request.getSession();
+
+            session.setAttribute("mensaje", "Cuenta creada con exito");
+            response.sendRedirect(request.getContextPath() + "/login");
+
+
+        } catch (SQLException e) {
+            request.setAttribute("msg", "Error al registrar el usuario");
+            request.getRequestDispatcher("/registro.jsp").forward(request, response);
         }
 
-
     }
-
-
 
 
 }
