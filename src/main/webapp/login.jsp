@@ -40,6 +40,13 @@
 
     <button type="submit">Iniciar sesion</button>
 
+<p>
+    <a href="<%= request.getContextPath() %>/RegistroServlet">
+        Crear cuenta
+    </a>
+</p>
+
+
 </form>
 
 
