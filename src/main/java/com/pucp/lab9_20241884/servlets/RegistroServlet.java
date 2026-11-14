@@ -41,8 +41,7 @@ public class RegistroServlet extends HttpServlet {
             || password == null ||  password.isBlank()){
 
             request.setAttribute("error", "El registro no puede estar vacio");
-            request.getRequestDispatcher("/registro.jsp")
-                    .forward(request, response);
+            request.getRequestDispatcher("/registro.jsp").forward(request, response);
             return;
 
         }

@@ -10,9 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    Usuario usuarioNavbar =
-            (Usuario) session.getAttribute("usuario");
-
+    Usuario usuarioNavbar = (Usuario) session.getAttribute("usuario");
     String contexto = request.getContextPath();
 %>
 
