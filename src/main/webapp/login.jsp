@@ -10,7 +10,6 @@
 <%
     String mensaje = (String) session.getAttribute("mensaje");
     String error = (String) request.getAttribute("error");
-
     session.removeAttribute("mensaje");
 %>
 

@@ -9,7 +9,7 @@ public abstract class BaseDao {
 
     private static final String URL = "jdbc:mysql://localhost:3306/lab9_biblioteca";
     private static final String USER = "root";
-    private static final String PASS = "mierda1A.";
+    private static final String PASS = "12345678";
 
     protected Connection getConnection() throws SQLException {
         try {
