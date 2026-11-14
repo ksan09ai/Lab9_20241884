@@ -40,7 +40,7 @@ public class RegistroServlet extends HttpServlet {
             || email == null || email.isBlank()
             || password == null ||  password.isBlank()){
 
-            request.setAttribute("msg", "El registro no puede estar vacio");
+            request.setAttribute("error", "El registro no puede estar vacio");
             request.getRequestDispatcher("/registro.jsp")
                     .forward(request, response);
             return;
@@ -70,7 +70,7 @@ public class RegistroServlet extends HttpServlet {
             HttpSession session = request.getSession();
 
             session.setAttribute("mensaje", "Cuenta creada con exito");
-            response.sendRedirect(request.getContextPath() + "/login");
+            response.sendRedirect(request.getContextPath() + "/LoginServlet");
 
 
         } catch (SQLException e) {
